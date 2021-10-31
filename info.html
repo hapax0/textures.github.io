@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Info</title>
+</head>
+
+<body id="body">
+
+<h1>Brush/Texture tool</h1>
+  
+<p>Use this tool to create brushes and patterns for use with Concepts app or similar.</p>
+
+<h2>Brushes (top row of icons: left to right)</h2>
+
+The brushes and patterns mostly use the "feature size", "quantity" and "opacity" sliders.
+
+<ul>
+<li>Airbrush: use "quantity" and "feature size" to adjust output. This is the only brush that uses the guassian distribution.</li>
+<li>Haze: fills the canvas with a random lnear gradient.</li>
+<li>Rips: simulates ripped paper. Uses "feature size" and opacity.</li>
+<li>Mass: irregular shape on left or right.</li>
+<li>Blobs: small irregular shapes.</li>
+<li>Smudges, Fiber, Horizontal and Arcs: also use "quantity" and "feature size".</li>
+<li>Halftone and the four hatches brushes use "closeness" settings to pscae out the lines or dots.</li>
+<li>Skinny lines: horizontal lines across the whole canvas.</li>
+<li>Rays: lines radiating from a small area in the canvas.</li>
+<li>Spirals: two types of spiral lines.</li>
+<li>Clear the canvas.</li>
+<li>Download the canvas as a PNG file.</li>
+<li>Info: show this page.</li>
+</ul>
+
+<h2>Second row of icons</h2>
+
+<ul>
+<li>Paintbucket: fill the canvas.</li>
+<li>Fade center: this just fades the center of the canvas.</li>
+<li>Radial gradient: center is transparent: edges darkened.</li>
+<li>Frame: frame the canvas.</li>
+<li>Left side vertical strip.</li>
+<li>Random vertical scratch.</li>
+<li>Random walk scratch.</li>
+<li>Fog.</li>
+<li>Flip canvas horizontally.</li>
+<li>Flip canvas vertically.</li>
+<li>Rotate 90 degrees.</li>
+<li>Rotate -90 degrees.</li>
+<li>Cut the canvas into strips with spaces between each strip. If grunge is chacked: half of the strips are skipped.</li>
+<li>Pixelado: Alternating strips - the rotated and repeated.</li>
+<li>Horizontal flip of alternatng canvas strips.</li>
+<li>Flip a random canvas strip horizontally.</li>
+<li>Flip a random canvas strip vertically.</li>
+<li>Smear from top down.</li>
+<li>Smear and rotate the canvas.</li>
+<li>Convert to greyscale.</li>
+<li>Invert colors.</li>
+</ul>
+
+<h2>Other functions</h2>
+<p><b>Load image...</b> select an image file to load in the canvas.</p>
+<p><b>Background:</b> color is not saved with the PNG file. Toggle to black or gray when working with light colors.</p>
+<p><b>Chars:</b> enter a single character, click chars and the canvas is filled with the character.</p>
+<p><b>Text tool:</b> links to the Text tool page, where you can generate text in different styles and colors.</p>
+<p><b>Test:</b> select a function from the list, then click to apply it.</p>
+<p><b>Grungy patterns:</b> when this is enabled most effects are modified - generally adding more randomness to the result.</p>
+<p><b>Mode:</b> refer to globaCompositeOperation and use the default unless you know how to use this feature. Use destination-over to draw only on transparent areas. 
+ Usefull if you want to fill in a background withot overwriting existing drawing.</p>
+
+<h2>Distribution</h2>
+<ul>
+    <li>Circle. Useful for creating a brush shape.</li>
+    <li>Square: for a background texture. Smudges, halftones and hatches should produce seamless patterns with most settings. Enabling Grungy patterns can break seamlessness.</li>
+    <li>Gaussian: only applies to the airbrush tool.</li>
+    <li>Flatten: clips the canvas to flatter region.</li>
+</ul>
+
+<h2>How to make a paper-like texture</h2>
+
+<ul>
+    <li>Clear the canvas and set the background color to gray.</li>
+    <li>Set feature size, quantity and opacity sliders to the middle.</li>
+    <li>Set the paint color to white.</li>
+    <li>Click the "fiber" button two or three times.</li>
+    <li>Change the paint color to black.</li>
+    <li>Click the "fiber" button two or three times.</li>
+    <li>Experiment with the three slider settings and try the different fiber buttons.</li>
+</ul>
+
+</body>
+</html>
+

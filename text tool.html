@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div style="margin-left:8px;">
+<div style="font-size:32px;font-weight:bold;">Text tool</div>
+<table border="0" cellpadding="6" style="margin-left:6px;">
+  <tr><td>font size: &nbsp;<input type="number" id="textsize" value="48" style="width:4em;" onchange='caption()'></td><td>opacity:
+  <input type="range" id="speck_opacity" min="1" max="100" value="100" onchange='caption()'></td><td></td></tr>
+<tr><td>color: <input type="color" id="paintcolor" onchange="setHex()">&nbsp;<input type="text" style="width:54px;" id="usercolor" value="#000000" size="7" pattern="#[0-9A-Fa-f]{6}" onchange="updateColor()">
+<a href="javascript:randomPickColor()" title='random color'>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-palette" viewBox="0 0 16 16">
+  <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+  <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8zm-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7z"/>
+</svg></a>
+</td><td>background: <a href="javascript:background()" title="toggle background color"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-circle-half" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+</svg></a>&nbsp;&nbsp;
+</td><td></td></tr>
+<tr><td>&nbsp;<button onclick="caption()">draw text:</button>&nbsp;<input type="text" id="caption" value="your text here" style="width:18em;">
+</td><td>
+  font <input list='facelist' id="face" onchange='caption()'><input type='button' class='mockbb' value='X' onclick="clearFace()" title="clear the face field">&nbsp;
+<datalist id="facelist">
+  <option value="arial">arial</option>
+  <option value="bookman">bookman</option>
+  <option value="calibri">calibri</option>
+  <option value="century gothic">century gothic</option>
+  <option value="courier new">courier new</option>
+  <option value="garamond">garamond</option>
+  <option value="georgia">georgia</option>
+  <option value="palatino">palatino</option>
+  <option value="tahoma">tahoma</option>
+  <option value="times new roman"></option>times new roman</option>
+  <option value="monospace" selected>monospace</option>
+  <option value="sans-serif">sans-serif</option>
+  <option value="serif">serif</option>
+  <option value="cursive">cursive</option>
+</datalist>
+<select id="style" onchange="caption()">
+  <option value="normal">normal</option>
+  <option value="100">100</option>
+  <option value="500">500</option>
+  <option value="900">900</option>
+  <option value="bold">bold</option>
+  <option value="bold italic">bold italic</option>
+  <option value= "italic">italic</option>
+  <option value="lighter">lighter</option>
+</select>
+
+</td><td>
+<a href="javascript:clearCanvas()" title="clear canvas">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-x-circle" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+  </svg></a>
+&nbsp;
+<a href="#" id="downloader" onclick="saveAs()" download="image.png" title="save as png file"
+><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-save" viewBox="0 0 16 16">
+  <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+</svg></a>
+</td></tr>
+</table>
+<div>
+<button onclick="boxText()">text box</button>&nbsp;<input type='button'  value='X' onclick="clearLines()" title="clear the text">&nbsp;<button onclick='wrapLines()'>&crarr;</button><input type='number' value='40' id='wrapwidth' style='width:50px;' title='wrap to width'><input type="checkbox" id="wordwrap" checked>:word wrap<br>
+<textarea id="lines" rows="4" cols="60">Text is displayed
+at a size which fits
+on one line
+even if there are lots and lots and lots and lots and lots and lots and lots of words!
+OK?</textarea>
+</div>
+<div id="background" style="width:1024px;height:512px;float:left;position:absolute;">
+<canvas id="myCanvas" width="1024" height="100" style="border:1px solid #000000;">
+</canvas>
+</div>
+</div>
+
+
+<script>
+let BLACK = 0
+
+window.onload = function () {
+  document.getElementById("paintcolor").value = randomColor()
+  document.getElementById("face").value = "arial"
+  setHex()
+}
+
+function caption () {
+  let canvas = document.getElementById("myCanvas");
+  let ctx = canvas.getContext('2d');
+  let cx = canvas.width/2, cy = canvas.height/2
+  let styles = document.getElementById("style").value
+  let faces = document.getElementById("face").value
+  if (!faces || faces.length < 1)
+    return
+  ctx.fillStyle = document.getElementById("paintcolor").value
+  ctx.strokeStyle = document.getElementById("paintcolor").value
+  let text = document.getElementById("caption").value
+  let size = +document.getElementById("textsize").value
+  ctx.globalAlpha = (document.getElementById("speck_opacity").value)/100
+  ctx.fillStyle = document.getElementById("paintcolor").value
+  ctx.font = (styles)+" "+size+"pt " + (faces)
+  let x = 8, y = 1.5 * size
+  clearCanvas()
+  let w = ctx.measureText(text).width + 24;
+  canvas.height =  12 + size * 2
+  canvas.width = w
+  let bkg = document.getElementById("background");
+  bkg.style.height = 12 + size * 2 +"px"
+  bkg.style.width = w +"px"
+  ctx.fillStyle = document.getElementById("paintcolor").value
+  ctx.strokeStyle = document.getElementById("paintcolor").value
+  text = document.getElementById("caption").value
+  size = +document.getElementById("textsize").value
+  ctx.globalAlpha = (document.getElementById("speck_opacity").value)/100
+  ctx.fillStyle = document.getElementById("paintcolor").value
+  ctx.font = (styles)+" "+size+"pt " + (faces)
+  ctx.fillText(text, x, y)
+}
+
+let lines = ["FIRST LINE", "THIS IS THE SECOND LINE", "THIS LINE IS THIRD & LONGER & LONGER", "SHORT", "FIRST LINE", "THIS IS THE SECOND LINE", "THIS LINE IS THIRD & LONGER & LONGER", "SHORT"]
+
+function boxText () {
+  let colors = ["red", "blue", "yellow", "green", "orange", "purple"]
+  let lines = document.getElementById("lines").value.split("\n")
+  let canvas = document.getElementById("myCanvas");
+  let ctx = canvas.getContext('2d');
+  let W = 1024//canvas.width
+  let cx = canvas.width/2, cy = canvas.height/2
+  let styles = document.getElementById("style").value
+  let faces = document.getElementById("face").value
+  if (!faces || faces.length < 1)
+    return
+  ctx.fillStyle = document.getElementById("paintcolor").value
+  ctx.strokeStyle = document.getElementById("paintcolor").value
+  let size = 24
+  ctx.font = (styles)+" "+size+"pt " + (faces)
+  let i = 0, w = 10
+  let H = 0, CW = 0, CH = 0
+  let sizes = [], widths = []
+  let maxH = 24
+  for (;i < lines.length; i++) {
+    w = ctx.measureText(lines[i]).width;
+    CH += 12 + 28 * (W/w)
+    CW =  w * (W/w)
+    maxH = (12 + 28 * (W/w) > maxH)? 12 + 28 * (W/w): maxH;
+    sizes[i] = 24*W/w
+    if (w <= 0)
+      sizes[i]=10
+  }
+  canvas.height = CH + maxH/3
+  canvas.width = CW + maxH/5
+  let bkg = document.getElementById("background");
+  bkg.style.height = canvas.height +"px"
+  bkg.style.width = canvas.width +"px"
+  let x = 8, y = 1.2 * sizes[0]
+  ctx.fillStyle = document.getElementById("paintcolor").value
+  ctx.globalAlpha = (document.getElementById("speck_opacity").value)/100
+  i = 0
+  for (; i < lines.length; i++) {
+    x = 12
+    if (i > 0)
+      y += sizes[i] + (sizes[i-1] || 2) * 0.25
+    //ctx.fillStyle = colors[i % colors.length]
+
+    ctx.font = (styles)+" "+sizes[i]+"pt " + (faces)
+    ctx.fillText(lines[i], x, y)
+  }
+}
+
+function wrapLines () {
+  let maxW = 50, i = 0
+  let lines = document.getElementById("lines").value
+  maxW = +document.getElementById("wrapwidth").value
+  lines = lines.replace(/[\r\n]/gm, " ")
+  let s = ""
+  if (document.getElementById("wordwrap").checked)
+    s = "\\s"
+  if (maxW > 0)
+    lines = wrap(lines, maxW, s)
+  document.getElementById("lines").value = lines
+}
+
+const wrap = (s, w, space) => s.replace(
+    new RegExp("(?![^\\n]{1,"+w+"}$)([^\\n]{1,"+w+"})"+space, "g"),
+   '$1\n'
+);
+
+ // /(?![^\n]{1,28}$)([^\n]{1,28})\s/g, '$1\n'
+function clearFace () {
+  document.getElementById("face").value = ""
+}
+
+function clearLines () {
+  document.getElementById("lines").value = ""
+}
+
+function randomPickColor() {
+  document.getElementById("paintcolor").value = randomColor()
+  setHex()
+  caption()
+}
+
+function updateColor () {
+  let uc = document.getElementById("usercolor").value
+  document.getElementById("paintcolor").value = uc
+  caption()
+}
+
+function setHex () {
+  let uc = document.getElementById("paintcolor").value
+  document.getElementById("usercolor").value = uc
+  caption()
+}
+
+function background () {
+  let result = document.getElementById("background")
+  BLACK = (BLACK + 1) % 3
+  if (BLACK == 0) {
+    result.style.backgroundColor = "#fff";
+  } else
+  if (BLACK == 1) {
+    result.style.backgroundColor = "#777";
+  } else
+    result.style.backgroundColor = "#000";
+}
+
+function randomColor() {
+  let r = ('0'+(randomFromTo(10,256)).toString(16)).slice(-2),
+  g = ('0'+(randomFromTo(10,256)).toString(16)).slice(-2),
+  b = ('0'+(randomFromTo(10,256)).toString(16)).slice(-2);
+  return '#' +r+g+b;
+}
+
+function randomFromTo(from, to) {
+  return Math.floor(Math.random() * (to - from + 1) + from);
+}
+
+function randomPick (array) {
+  return array[Math.floor((array.length) * Math.random())]
+}
+
+function shuffle (array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+function fill () {
+  let canvas = document.getElementById("myCanvas");
+  let ctx = canvas.getContext("2d")
+  ctx.globalAlpha = document.getElementById("speck_opacity").value/100
+  ctx.save()
+  clip()
+  ctx.fillStyle = document.getElementById("paintcolor").value
+  ctx.fillRect(0,0,canvas.width, canvas.height)
+  ctx.restore()
+}
+
+function drawImage(image, x, y, scale, rotation, ctx){
+    ctx.setTransform(scale, 0, 0, scale, x, y); // sets scale and origin
+    ctx.rotate(rotation);
+    ctx.drawImage(image, -image.width / 2, -image.height / 2);
+}
+
+function drawImageCenter(image, x, y, cx, cy, scale, rotation, ctx){
+    ctx.setTransform(scale, 0, 0, scale, x, y); // sets scale and origin
+    ctx.rotate(rotation);
+    ctx.drawImage(image, -cx, -cy);
+}
+
+function randomGradient(canvas, col1) {
+  let x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+  let centx = Math.random() * canvas.width;
+  let centy = Math.random() * canvas.height;
+  let radius = canvas.width/2;
+  let angle = Math.random()*6.27;
+  x1 = radius * Math.cos(angle)+centx;
+  y1 = radius * Math.sin(angle)+centy;
+  x2 = radius * Math.cos(angle+3.14)+centx;
+  y2 = radius * Math.sin(angle+3.14)+centy;
+  let my_gradient = canvas.getContext('2d').createLinearGradient(x1, y1, x2, y2);
+  if (col1 === undefined)
+    col1 = randomColor();
+  let col2 = "rgba("+hexToR(col1)+", "+hexToG(col1)+", "+hexToB(col1)+", 0.0)";// transparent
+  my_gradient.addColorStop(0,col1);
+  my_gradient.addColorStop(1,col2);
+  return my_gradient;
+}
+
+function hexToR(h) { return parseInt((cutHex(h)).substring(0,2),16) }
+function hexToG(h) { return parseInt((cutHex(h)).substring(2,4),16) }
+function hexToB(h) { return parseInt((cutHex(h)).substring(4,6),16) }
+function cutHex(h) { return (h.charAt(0)=="#") ? h.substring(1,7) : h}
+
+function resizeCanvas () {
+  clearCanvas()
+  let canvas_size = 256 * document.getElementById("canvas_size").value
+  let canvas = document.getElementById("myCanvas");
+  canvas.height = canvas_size
+  canvas.width = canvas_size
+  let bkg = document.getElementById("background");
+  bkg.style.height = canvas_size/2 +"px"
+  bkg.style.width = canvas_size +"px"
+  document.getElementById("cs").innerHTML = canvas.width + "px"
+}
+
+function clearCanvas () {
+  let canvas = document.getElementById("myCanvas");
+  let ctx = canvas.getContext("2d");
+  ctx.clearRect(0,0,canvas.width, canvas.height)
+}
+
+function saveAs () {
+  //console.log(document.getElementById("myCanvas").height)
+  document.getElementById("downloader").download = "image.png";
+  document.getElementById("downloader").href = document.getElementById("myCanvas").toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+}
+
+function pet(v) {
+  return (Math.random() -0.5) * v;
+}
+
+function distance (x1, y1, x2, y2) {
+  return Math.pow(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2), 0.5)
+}
+</script>
+</body>
+</html>
